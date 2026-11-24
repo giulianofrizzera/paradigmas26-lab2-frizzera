@@ -35,7 +35,9 @@ object Analyzer {
    *                  )
    */
   def detectEntities(text: String, dictionary: List[NamedEntity]): List[NamedEntity] = {
-    ???
+    dictionary.filter { entity =>
+      text.toLowerCase.contains(entity.text.toLowerCase)
+    }.distinct
   }
 
   /**

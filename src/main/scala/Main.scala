@@ -41,6 +41,9 @@ object Main {
     //     1. Detectar entidades
     //     2. Formatear y mostrar el resultado
 
+    val text = "Scala fue creado en EPFL por Martin Odersky"
+    val found = Analyzer.detectEntities(text, dictionary)
+    found.foreach(e => println(e.describe))
     // ------------------------------------------------------------------
     // Paso 4: Estadísticas globales
     // ------------------------------------------------------------------

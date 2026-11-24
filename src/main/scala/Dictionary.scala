@@ -70,9 +70,9 @@ object Dictionary {
    *
    */
   def loadAll(): List[NamedEntity] = {
+    loadFromFile("data/languages.txt", "ProgrammingLanguage") :::
     loadFromFile("data/people.txt", "Person") :::
     loadFromFile("data/universities.txt", "University") :::
-    loadFromFile("data/languages.txt ", "ProgrammingLanguage") :::
     loadFromFile("data/organizations.txt", "Organization") :::
     loadFromFile("data/places.txt", "Place") 
   }
