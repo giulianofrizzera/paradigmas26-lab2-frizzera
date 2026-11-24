@@ -18,6 +18,9 @@
  *   Python
  *   Haskell
  */
+
+import scala.io.Source
+import scala.util.Try
 object Dictionary {
 
   /**
@@ -38,7 +41,26 @@ object Dictionary {
    *
    */
   def loadFromFile(filePath: String, entityType: String): List[NamedEntity] = {
-    ???
+    val lines: List[String] = Try {
+      val source = Source.fromFile(filePath)
+      val content = source.getLines.toList
+      source.close()
+      content
+    }.getOrElse(List())
+    lines
+      .map(_.trim)
+      .filter(_.nonEmpty)
+      .map { text => 
+        entityType match {
+          case "Person" => new Person(text)
+          case "Organization" => new Organization(text)
+          case "University" => new University(text)
+          case "Place" => new Place(text)
+          case "Technology" => new Technology(text)
+          case "ProgrammingLanguage" => new ProgrammingLanguage(text)
+          case _ => sys.error("Error: entity type does not exist")
+        }
+      }
   }
 
   /**
@@ -46,10 +68,12 @@ object Dictionary {
    *
    * @return lista con todas las entidades de todos los diccionarios
    *
-   * TODO (Ejercicio 2): Implementar este método.
-   *
    */
   def loadAll(): List[NamedEntity] = {
-    ???
+    loadFromFile("data/people.txt", "Person") :::
+    loadFromFile("data/universities.txt", "University") :::
+    loadFromFile("data/languages.txt ", "ProgrammingLanguage") :::
+    loadFromFile("data/organizations.txt", "Organization") :::
+    loadFromFile("data/places.txt", "Place") 
   }
 }

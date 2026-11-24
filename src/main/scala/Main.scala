@@ -5,32 +5,33 @@
 object Main {
   def main(args: Array[String]): Unit = {
     
-    val entities: List[NamedEntity] = List(
+    /*val entities: List[NamedEntity] = List(
      new Person("Alan Turing"),
      new University("MIT"),
      new ProgrammingLanguage("Scala"),
      new Place("San Francisco")
    )
    entities.foreach(e => println(e.describe))
+   */
     // ------------------------------------------------------------------
     // Paso 1: Cargar diccionarios
     // ------------------------------------------------------------------
     // TODO (Ejercicio 2)
-    // val dictionary: List[NamedEntity] = ???
+     val dictionary: List[NamedEntity] = Dictionary.loadAll()
 
-    // println(s"Diccionario cargado: ${dictionary.size} entidades.\n")
+     println(s"Diccionario cargado: ${dictionary.size} entidades.\n")
 
     // ------------------------------------------------------------------
     // Paso 2: Descargar posts
     // ------------------------------------------------------------------
-    // val subscriptions = FileIO.readSubscriptions()
+     val subscriptions = FileIO.readSubscriptions()
 
-    // val allPosts: List[(String, List[String])] = subscriptions.map { url =>
-    //  println(s"Descargando posts de: $url")
-    //  val json   = FileIO.downloadFeed(url)
-    //  val titles = FileIO.extractPostTitles(json)
-    // (url, titles)
-    //}
+     val allPosts: List[(String, List[String])] = subscriptions.map { url =>
+      println(s"Descargando posts de: $url")
+      val json   = FileIO.downloadFeed(url)
+      val titles = FileIO.extractPostTitles(json)
+     (url, titles)
+    }
 
     // ------------------------------------------------------------------
     // Paso 3: Detectar entidades y mostrar resultados por post
