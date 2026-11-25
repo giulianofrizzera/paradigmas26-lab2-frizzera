@@ -62,6 +62,8 @@ object Analyzer {
    *                 )
    */
   def countByType(entities: List[NamedEntity]): Map[String, Int] = {
-    ???
+    entities
+      .groupBy(_.entityType)
+      .map { case (entityType, list) => (entityType, list.size)}
   }
 }
